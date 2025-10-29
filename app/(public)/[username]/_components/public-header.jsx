@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import React from "";
+import React from "react";
 
 const PublicHeader = ({ link, title }) => {
   return (
