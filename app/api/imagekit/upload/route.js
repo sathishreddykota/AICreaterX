@@ -2,12 +2,19 @@ import { NextResponse } from "next/server";
 import ImageKit from "imagekit";
 import { auth } from "@clerk/nextjs/server";
 
-// Initialize ImageKit
-const imagekit = new ImageKit({
-  publicKey: process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY,
-  privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
-  urlEndpoint: process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT,
-});
+// Initialize ImageKit lazily to avoid build-time errors
+let imagekit = null;
+
+function getImageKit() {
+  if (!imagekit) {
+    imagekit = new ImageKit({
+      publicKey: process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY,
+      privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
+      urlEndpoint: process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT,
+    });
+  }
+  return imagekit;
+}
 
 export async function POST(request) {
   try {
@@ -37,7 +44,7 @@ export async function POST(request) {
     const uniqueFileName = `${userId}/${timestamp}_${sanitizedFileName}`;
 
     // Upload to ImageKit - Simple server-side upload
-    const uploadResponse = await imagekit.upload({
+    const uploadResponse = await getImageKit().upload({
       file: buffer,
       fileName: uniqueFileName,
       folder: "/blog_images",
