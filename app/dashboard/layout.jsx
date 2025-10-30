@@ -52,7 +52,7 @@ export default function DashboardLayout({ children }) {
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white">
+    <div className="min-h-screen bg-background">
       {/* Mobile Sidebar Overlay */}
       {isSidebarOpen && (
         <div
@@ -64,15 +64,15 @@ export default function DashboardLayout({ children }) {
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed top-0 left-0 h-full w-64 bg-slate-800/50 backdrop-blur-sm border-r border-slate-700 z-50 transition-transform duration-300 lg:translate-x-0",
+          "fixed top-0 left-0 h-full w-64 bg-card border-r border-border z-50 transition-transform duration-300 lg:translate-x-0",
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
         {/* Sidebar Header */}
-        <div className="flex items-center justify-between p-5 border-b border-slate-700">
+        <div className="flex items-center justify-between p-5 border-b border-border">
           <Link href={"/"} className="flex-shrink-0">
-            <h1 className="text-2xl font-black">
-              <span className="gradient-text-primary">AICreaterX</span>
+            <h1 className="text-xl font-bold">
+              <span>AICreaterX</span>
             </h1>
           </Link>
 
@@ -88,7 +88,7 @@ export default function DashboardLayout({ children }) {
         </div>
 
         {/* Navigation */}
-        <nav className="p-4 space-y-2">
+        <nav className="p-4 space-y-1">
           {sidebarItems.map((item, index) => {
             const isActive =
               pathname === item.href ||
@@ -102,27 +102,27 @@ export default function DashboardLayout({ children }) {
               >
                 <div
                   className={cn(
-                    "flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 group",
+                    "flex items-center space-x-3 px-3 py-2.5 rounded-lg transition-colors duration-200 group",
                     isActive
-                      ? "bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30 text-white"
-                      : "text-slate-300 hover:text-white hover:bg-slate-700/50"
+                      ? "bg-muted text-foreground"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                   )}
                 >
                   <item.icon
                     className={cn(
-                      "h-5 w-5 transition-colors",
+                      "h-4 w-4 transition-colors",
                       isActive
-                        ? "text-purple-400"
-                        : "text-slate-400 group-hover:text-white"
+                        ? "text-foreground"
+                        : "text-muted-foreground group-hover:text-foreground"
                     )}
                   />
-                  <span className="font-medium">{item.title}</span>
+                  <span className="text-sm font-medium">{item.title}</span>
 
                   {/* Badge for Create Post if draft exists */}
                   {item.title === "Create Post" && draftPost && (
                     <Badge
                       variant="secondary"
-                      className="ml-auto text-xs bg-orange-500/20 text-orange-300 border-orange-500/30"
+                      className="ml-auto text-xs"
                     >
                       Draft
                     </Badge>
@@ -139,7 +139,7 @@ export default function DashboardLayout({ children }) {
             <Button
               variant="outline"
               size="sm"
-              className="w-full justify-start text-slate-300 hover:text-white rounded-xl p-4"
+              className="w-full justify-start rounded-lg p-3"
             >
               <Settings className="h-4 w-4 mr-2" />
               Settings
@@ -152,10 +152,9 @@ export default function DashboardLayout({ children }) {
       <div className="ml-0 lg:ml-64">
         {/* Top Header */}
         <header
-          className="fixed w-full top-0 right-0 z-30 bg-slate-800/80 backdrop-blur-md border-b border-slate-700"
-          // style={{ left: "auto", width: "calc(100% - 16rem)" }}
+          className="fixed w-full top-0 right-0 z-30 bg-card/95 backdrop-blur-sm border-b border-border"
         >
-          <div className="flex items-center justify-between px-4 lg:px-8 py-4">
+          <div className="flex items-center justify-between px-4 lg:px-8 py-3">
             {/* Left Side - Mobile Menu + Search */}
             <div className="flex items-center space-x-4">
               {/* Mobile Menu Button */}
@@ -175,10 +174,10 @@ export default function DashboardLayout({ children }) {
               <UserButton
                 appearance={{
                   elements: {
-                    avatarBox: "w-8 h-8 rounded-lg border border-slate-600",
+                    avatarBox: "w-8 h-8 rounded-lg border border-border",
                     userButtonPopoverCard:
-                      "shadow-xl backdrop-blur-md bg-slate-800/90 border border-slate-600",
-                    userPreviewMainIdentifier: "font-semibold text-white",
+                      "shadow-lg bg-card border border-border",
+                    userPreviewMainIdentifier: "font-semibold",
                   },
                 }}
                 afterSignOutUrl="/"
@@ -188,7 +187,7 @@ export default function DashboardLayout({ children }) {
         </header>
 
         {/* Page Content */}
-        <main className="mt-16">{children}</main>
+        <main className="mt-14">{children}</main>
       </div>
     </div>
   );

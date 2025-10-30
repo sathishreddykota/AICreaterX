@@ -10,8 +10,8 @@ import { ConvexClientProvider } from "@/components/convex-client-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "AICreaterX - AI-Powered Content Creation Platform",
-  description: "Create amazing content with AI. Transform your ideas into engaging blog posts with the power of artificial intelligence.",
+  title: "AICreaterX - Professional Content Platform",
+  description: "Build your professional brand, share expertise, and grow your network. A modern platform for professionals to create impactful content and meaningful connections.",
 };
 
 export default function RootLayout({ children }) {
@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
           >
             <ConvexClientProvider>
               <Header />
-              <main className="bg-slate-900 min-h-screen text-white overflow-x-hidden">
+              <main className="bg-background min-h-screen overflow-x-hidden">
                 <Toaster richColors />
 
                 {children}

@@ -70,15 +70,15 @@ export default function FeedPage() {
   const currentPosts = getCurrentPosts();
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white pt-32 pb-5">
+    <div className="min-h-screen bg-background pt-32 pb-5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Feed Header */}
         <div className="text-center mb-10">
-          <h1 className="text-5xl font-bold gradient-text-primary pb-2">
-            Discover Amazing Content
+          <h1 className="text-5xl font-bold pb-2">
+            Discover Professional Content
           </h1>
-          <p className="text-slate-400">
-            Stay up to date with the latest posts from creators you follow
+          <p className="text-muted-foreground">
+            Stay connected with insights and updates from your professional network
           </p>
         </div>
 
@@ -120,14 +120,14 @@ export default function FeedPage() {
                       sizes="40px"
                     />
                   ) : (
-                    <div className="w-full h-full rounded-full bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center text-sm font-bold">
+                    <div className="w-full h-full rounded-full bg-muted flex items-center justify-center text-sm font-bold">
                       {(currentUser.firstName || "U").charAt(0).toUpperCase()}
                     </div>
                   )}
                 </div>
                 <div className="flex-1">
-                  <div className="bg-slate-800 border border-slate-600 rounded-full px-4 py-3 text-slate-400 hover:border-slate-500 transition-colors">
-                    What's on your mind? Share your thoughts...
+                  <div className="bg-muted/50 border rounded-full px-4 py-3 text-muted-foreground hover:border-foreground/20 transition-colors">
+                    Share your professional insights...
                   </div>
                 </div>
               </Link>
@@ -142,20 +142,20 @@ export default function FeedPage() {
                 </div>
               </div>
             ) : currentPosts.length === 0 ? (
-              <Card className="card-glass">
+              <Card>
                 <CardContent className="text-center py-12">
                   <div className="space-y-4">
                     <div className="text-6xl">📝</div>
                     <div>
-                      <h3 className="text-xl font-bold text-white mb-2">
+                      <h3 className="text-xl font-bold mb-2">
                         {activeTab === "trending"
                           ? "No trending posts right now"
                           : "No posts to show"}
                       </h3>
-                      <p className="text-slate-400 mb-6">
+                      <p className="text-muted-foreground mb-6">
                         {activeTab === "trending"
                           ? "Check back later for trending content"
-                          : "Follow some creators to see their posts here"}
+                          : "Follow professionals to see their posts here"}
                       </p>
                     </div>
                   </div>
@@ -189,11 +189,11 @@ export default function FeedPage() {
           {/* Left Sidebar - Following */}
           <div className="lg:col-span-2 space-y-6 mt-14">
             {/* Suggested Users */}
-            <Card className="card-glass">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-white flex items-center">
+                <CardTitle className="flex items-center">
                   <Sparkles className="h-5 w-5 mr-2" />
-                  Suggested Users
+                  Professionals to Follow
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -203,7 +203,7 @@ export default function FeedPage() {
                   </div>
                 ) : !suggestedUsers || suggestedUsers.length === 0 ? (
                   <div className="text-center py-4">
-                    <p className="text-slate-400 text-sm">
+                    <p className="text-muted-foreground text-sm">
                       No suggestions available
                     </p>
                   </div>
@@ -224,16 +224,16 @@ export default function FeedPage() {
                                     sizes="40px"
                                   />
                                 ) : (
-                                  <div className="w-full h-full rounded-full bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center text-sm font-bold">
+                                  <div className="w-full h-full rounded-full bg-muted flex items-center justify-center text-sm font-bold">
                                     {user.name.charAt(0).toUpperCase()}
                                   </div>
                                 )}
                               </div>
                               <div className="flex-1">
-                                <p className="text-sm font-medium text-white">
+                                <p className="text-sm font-medium">
                                   {user.name}
                                 </p>
-                                <p className="text-xs text-slate-400">
+                                <p className="text-xs text-muted-foreground">
                                   @{user.username}
                                 </p>
                               </div>
@@ -243,18 +243,17 @@ export default function FeedPage() {
                             onClick={() => handleFollowToggle(user._id)}
                             variant="outline"
                             size="sm"
-                            className="border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white"
                           >
                             <UserPlus className="h-3 w-3 mr-1" />
                             Follow
                           </Button>
                         </div>
-                        <div className="text-xs text-slate-500 pl-13">
+                        <div className="text-xs text-muted-foreground pl-13">
                           {user.followerCount} followers • {user.postCount}{" "}
                           posts
                         </div>
                         {user.recentPosts && user.recentPosts.length > 0 && (
-                          <div className="text-xs text-slate-400 pl-13">
+                          <div className="text-xs text-muted-foreground pl-13">
                             Latest: "
                             {user.recentPosts[0].title.substring(0, 30)}..."
                           </div>
