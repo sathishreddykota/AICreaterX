@@ -30,6 +30,7 @@ export default function RootLayout({ children }) {
             appearance={{
               baseTheme: shadesOfPurple,
             }}
+            dynamic
           >
             <ConvexClientProvider>
               <Header />
